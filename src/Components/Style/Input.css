@@ -1,0 +1,31 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 15px 15px;
+}
+
+header input {
+    width: 100%;
+    max-width: 280px;
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.61);
+    border-radius: 8px;
+    color: rgb(255, 255, 255);
+    border-bottom: 3px solid #ffffff;
+    font-size: 20px;
+    font-weight: 300;
+    transition: 0.2s ease-out;
+}
+
+@media only screen and (max-width: 800px) {
+    header {
+        position: relative;
+        align-items: center;
+        padding: 0px 60px 20px 50px;
+        margin-top: 1000px;
+        overflow: hidden;
+    }
+}
