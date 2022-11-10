@@ -5,22 +5,34 @@ const Input = () => {
     const [locationIn,setLocationIn] = useState('');
     const [isTyped, setisTyped] = useState(false);
     const [sty,setSty] = useState({});
+    const [isNotFound,setIsNotFound] = useState(false);
+    
     
     useEffect(
         ()=>{
             if( window.innerWidth <= 850)
             {
                 if(!isTyped){
-                    setSty({"margin-top": "100px"})
+                    setSty({"margin-top": "150px"});
                 }
-    
-                if(isTyped){
-                    setSty({"margin-top": "800px"})
+
+                if(isNotFound){
+                    console.log('reached - style')
+                    setSty({"margin-top": "150px"});
+                }
+                else if(isTyped ){
+                    setSty({"margin-top": "1000px"});
                 }
             }
             
         }
-    ,[isTyped])
+    ,[isTyped],[isNotFound])
+    
+    function handleIsNotFound(val){
+        console.log("Parent update")
+        setIsNotFound(val);
+    }
+
     return (
         <>
         
@@ -42,7 +54,8 @@ const Input = () => {
                         }
 
                         onBlur = {
-                            (prev)=>setisTyped(true)
+                            
+                            (prev)=>{if(locationIn != "")setisTyped(true)}
                         }
 
                         onEnter
@@ -61,7 +74,7 @@ const Input = () => {
             {
                 isTyped && locationIn!=""?
                 <div className='results'>
-                    <FunAxios location={locationIn} />
+                    <FunAxios location={locationIn} updateIsNotFound={handleIsNotFound}/>
                 </div>
             :
             <h2>

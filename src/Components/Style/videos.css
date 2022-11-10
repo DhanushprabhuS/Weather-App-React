@@ -45,6 +45,7 @@ video {
         background-color: rgb(112, 219, 255);
     }
     video {
-        visibility: hidden;
+        position: fixed;
+        z-index: -1;
     }
 }

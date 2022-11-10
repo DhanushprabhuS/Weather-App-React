@@ -17,6 +17,7 @@ const FunAxios = React.memo( (props) => {
     const[location,setLocation] = useState(props.location);
     const[days,setDays] = useState([]);
     const[clicked,setClicked] = useState(false);
+    const[error,setError] = useState(false);
 
 
 
@@ -45,8 +46,6 @@ const FunAxios = React.memo( (props) => {
         if(date!=="" && date7!=="")
         {
             console.log("get : ");
-            console.log(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/salem/${date}/${date7}?key=${key}`)
-
             axios
                 .get(
                         `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${date}/${date7}?key=${key}`)
@@ -56,13 +55,18 @@ const FunAxios = React.memo( (props) => {
                                 setData(response.data);
                                 setIsLoaded(true);
                                 setDays(response.data.days);
+                                props.updateIsNotFound(false);
                                 console.log("Days : "+response.data.days)
                             })
                 .catch(
                         (error)=>{
                             console.log("ErrOr : occured getting"+error);
                             setIsLoaded(false);
-                        })
+                            setError(true);
+                            props.updateIsNotFound(true);
+                            console.log("False - ");
+                        }
+                        )
         }
     }, [date,date7,location]);
 
@@ -74,6 +78,13 @@ const FunAxios = React.memo( (props) => {
         setClicked(true);
     }
 
+    if(error){
+        return (
+            <h2>
+                City not found...!
+            </h2>
+        )
+    }
 
     if(!isLoaded)
     {
