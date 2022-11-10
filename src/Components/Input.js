@@ -5,7 +5,7 @@ const Input = () => {
     const [locationIn,setLocationIn] = useState('');
     const [isTyped, setisTyped] = useState(false);
     const [sty,setSty] = useState({});
-    const [isNotFound,setIsNotFound] = useState(false);
+    const [isNotFound,setIsNotFound] = useState(true);
     
     
     useEffect(
