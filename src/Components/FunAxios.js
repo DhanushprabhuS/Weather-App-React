@@ -76,6 +76,8 @@ const FunAxios = React.memo( (props) => {
     const updateData=(data)=>{
         setIDay(data);
         setClicked(true);
+        console.log("I Day data - ");
+        console.log(data);
     }
 
     if(error){

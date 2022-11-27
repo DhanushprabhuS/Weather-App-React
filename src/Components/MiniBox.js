@@ -8,7 +8,7 @@ const MiniBox = (props) => {
     const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     const [month,setMonth] = useState('');
     const [date, setDate] = useState('');
-    
+    const weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     function handelClick(){
         console.log("reached clicking - "+data.icon);
         props.updateParent(props.data);
@@ -28,7 +28,7 @@ const MiniBox = (props) => {
                 {((data.temp-32)*(5/9)).toFixed(1)}&#176;C
             </h3>
             <hr size="1"/>
-            <h5 style={{'color':'yellow'}}>{month} {date}</h5>
+            <h4 style={{'color':'yellow'}}>{month} {date} , {weekday[(new Date(data.datetime)).getDay()]}</h4>
         </div>
     );
 }

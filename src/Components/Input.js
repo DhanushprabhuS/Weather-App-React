@@ -13,23 +13,29 @@ const Input = () => {
             if( window.innerWidth <= 850)
             {
                 if(!isTyped){
+                    console.log("not view ")
                     setSty({"margin-top": "150px"});
                 }
 
                 if(isNotFound){
-                    console.log('reached - style')
+                    console.log('view reached - style')
                     setSty({"margin-top": "150px"});
+                    console.log("view - 150px")
                 }
-                else if(isTyped ){
-                    setSty({"margin-top": "1000px"});
+                else {
+                    if(isTyped ){
+                        setSty({"margin-top": "1000px"});
+                        console.log("view - 1000px")
+                    }
                 }
+                
             }
             
         }
     ,[isTyped],[isNotFound])
     
     function handleIsNotFound(val){
-        console.log("Parent update")
+        console.log("Parent update not fount - "+val)
         setIsNotFound(val);
     }
 
@@ -43,25 +49,33 @@ const Input = () => {
                         <input type="text" className='search-box'
                         placeholder= 'Search for a city...'
                         value={locationIn} 
-                        onChange={(e)=>{
-                            setLocationIn(e.target.value);   
-                        }}
+                        onChange={
+                            (e)=>{
+                            setLocationIn(e.target.value);
+                            setIsNotFound(false);
+                        }
+                        
+                    }
 
                         onKeyPress={
                             (e)=>{
                                 if(e.key === 'Enter')setisTyped(true);
+                                setIsNotFound(false);
                             }
                         }
 
                         onBlur = {
                             
-                            (prev)=>{if(locationIn != "")setisTyped(true)}
+                            (prev)=>{
+                                if(locationIn != "")setisTyped(true);
+                                setIsNotFound(false);
+                            }
                         }
 
                         onEnter
 
                         onFocus = {
-                            (prev)=>setisTyped(false)
+                            (prev)=>{setisTyped(false); setIsNotFound(false);}
                         }
 
                         />
